@@ -1,0 +1,46 @@
+<div
+	[ngClass]="[
+		's0-multi-select'
+	]"
+  [class.s0-multi-select--opened]="opened"
+	(click)="open()"
+	cdkOverlayOrigin
+>
+	<div
+    class="s0-multi-select__label"
+    *ngIf="selectionLabels && selectionLabels.length > 0"
+  >
+    <span class="s0-multi-select__label-items">{{ selectionLabels.join(', ')}}</span> <span class="s0-multi-select__label-chip">{{ selectionLabels.length }}</span>
+  </div>
+
+	<div
+    class="s0-multi-select__label"
+    *ngIf="!selectionLabels || selectionLabels.length < 1"
+  >
+    {{ '-- ' + prompt + ' --' }}
+  </div>
+  <s0-icon
+    class="s0-multi-select__label-icon"
+    [name]="opened ? 'expand-less' : 'expand-more'"
+    [color]="disabled ? 'gray-50' : 'primary'"
+    size="md"
+  ></s0-icon>
+</div>
+
+<ng-template #optionsTemplate>
+  <div class="s0-multi-select__options">
+    <div class="s0-multi-select__search">
+      <input
+        class="s0-multi-select__search-input"
+        type="text"
+        placeholder="Search..."
+        spellcheck="false"
+        (input)="search.next($event.target.value)"
+      >
+    </div>
+
+    <div class="s0-multi-select__tree" *ngIf="tree">
+      <s0-tree [search]="search" [data]="tree" [selected]="selectionTree" behavior="check-list" (selectionChange)="onSelectionChange($event)"></s0-tree>
+    </div>
+  </div>
+</ng-template>

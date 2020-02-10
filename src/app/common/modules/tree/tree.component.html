@@ -1,0 +1,38 @@
+<div
+  [ngClass]="[
+		's0-tree',
+		's0-tree--size' + size
+	]"
+>
+  <div class="s0-tree__body" *ngIf="tree && tree.children.length > 0; else emptyMsg">
+    <ng-container *ngTemplateOutlet="optionsTemplate; context:{ $implicit: tree.children, level: 0 }"></ng-container>
+  </div>
+
+  <ng-template #optionsTemplate let-children let-level="level">
+    <ng-container *ngFor="let node of children">
+      <s0-tree-branch
+        [node]="node"
+        [level]="level"
+        [behavior]="behavior"
+        [size]="size"
+        (stateChange)="switchState(node, $event)"
+        *ngIf="node.role === 'branch'"
+      >
+        <ng-container *ngTemplateOutlet="optionsTemplate; context: { $implicit: node.children, level: level + 1 }"></ng-container>
+      </s0-tree-branch>
+      <s0-tree-leaf
+        [node]="node"
+        [level]="level"
+        [behavior]="behavior"
+        [size]="size"
+        (stateChange)="switchState(node, $event)"
+        (click)="behavior === 'select' &&  selectLeaf($event, node)"
+        *ngIf="node.role === 'leaf'"
+      ></s0-tree-leaf>
+    </ng-container>
+  </ng-template>
+
+  <ng-template #emptyMsg>
+    <div class="s0-tree__msg">No options found.</div>
+  </ng-template>
+</div>

@@ -1,0 +1,118 @@
+
+/** Step0 MULTI SELECT **/
+
+.s0-multi-select {
+  position: relative;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 300px;
+  max-width: 480px;
+  height: 38px;
+  padding: 0 var(--s0-padding-7) 0 var(--s0-padding-3);
+  background-color: var(--s0-color-white);
+  border: 1px solid var(--s0-color-gray-6p);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.s0-multi-select--opened {
+  color: var(--s0-color-gray-40p);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-color: var(--s0-color-gray-20p);
+  border-bottom-color: transparent;
+}
+
+.s0-multi-select__label {
+  display: flex;
+  width: 100%;
+  color: var(--s0-color-gray-30p);
+  font-size: var(--s0-font-size-2);
+}
+
+.s0-multi-select__label-items {
+  color: var(--s0-color-gray-60p);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  flex: 1 1 0%;
+}
+
+.s0-multi-select__label-chip {
+  background-color: var(--s0-color-primary);
+  margin-left: var(--s0-margin-2);
+  padding: 0 var(--s0-padding-2);
+  color: var(--s0-color-white);
+  font-weight: 600;
+  border-radius: 8px;
+}
+
+.s0-multi-select__label-icon {
+  position: absolute;
+  right: 7px;
+  top: 7px;
+}
+
+.s0-multi-select__options {
+  width: 100%;
+  background-color: white;
+  border: 1px solid var(--s0-color-gray-20p);
+  border-top: none;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  padding: 0;
+  box-shadow: 2px 2px 6px -2px rgba(0, 0, 0, 0.15);
+}
+
+.s0-multi-select__search {
+  border-top: 1px solid var(--s0-color-gray-6p);
+  padding: var(--s0-padding-2) var(--s0-padding-3) 0 var(--s0-padding-3);
+}
+
+.s0-multi-select__search-input {
+  width: 100%;
+  height: 38px;
+  font-size: var(--s0-font-size-2);
+  display: block;
+  color: var(--s0-color-gray-60p);
+  border: none;
+  border-bottom: 1px solid var(--s0-color-gray-6p);
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  outline: none;
+
+  &:focus {
+    border-bottom-color: var(--s0-color-gray-20p);
+  }
+
+  &::placeholder {
+    color: var(--s0-color-gray-30p);
+    opacity: 1;
+  }
+}
+
+.s0-multi-select__tree {
+  padding: var(--s0-padding-3) var(--s0-padding-3);
+  overflow-y: auto;
+  max-height: 360px;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: var(--s0-color-gray-10p);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--s0-color-primary);
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: var(--s0-color-secondary);
+  }
+}

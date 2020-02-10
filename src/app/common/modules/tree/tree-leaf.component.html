@@ -1,0 +1,38 @@
+<div
+  [ngClass]="[
+    's0-tree-node',
+    's0-tree-node--level-' + level,
+    's0-tree-node--size-' + size,
+    's0-tree-node--state-' + node.state
+  ]"
+  [class.s0-tree-node--clickable]="behavior === 'select'"
+>
+  <div class="s0-tree-node__body">
+    <div
+      [ngClass]="[
+        's0-tree-node__check-box',
+        's0-tree-node__check-box--size-' + size
+      ]"
+      (click)="toggleSelection()"
+      *ngIf="behavior === 'check-list'"
+    >
+      <svg class="s0-tree-node__check-box-pipe" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" *ngIf="node.state === '1'">
+        <path d="M24 5.4l-2.8-2.8L8 15.8l-5.2-5.1L0 13.4l8 8 16-16z"/>
+      </svg>
+    </div>
+    <s0-icon
+      class="mr-2"
+      [size]="size"
+      [color]="node.state === '1' ? 'primary' : 'gray-40'"
+      [name]="node.state === '1' ? 'done' : 'close'"
+      *ngIf="behavior === 'none' && node.state"
+    ></s0-icon>
+    <div
+      class="s0-tree-node__label"
+      [class.s0-tree-node__label--clickable]="behavior === 'check-list'"
+      (click)="behavior === 'check-list' && toggleSelection()"
+    >
+      {{ node.label }}
+    </div>
+  </div>
+</div>

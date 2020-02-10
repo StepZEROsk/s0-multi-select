@@ -1,0 +1,48 @@
+<div
+  [ngClass]="[
+    's0-tree-node',
+    's0-tree-node--level-' + level,
+    's0-tree-node--size-' + size,
+    's0-tree-node--state-' + node.state
+  ]"
+>
+  <div
+    class="s0-tree-node__body"
+    [class.s0-tree-node__body--reverse]="behavior === 'check-list'"
+  >
+    <s0-icon
+      [class.mr-2]="behavior !== 'check-list'"
+      [size]="size"
+      [name]="node.expanded ? 'expand-more' : 'chevron-right'"
+      [clickable]="true"
+      (click)="node.expanded = !node.expanded"
+    ></s0-icon>
+    <div
+      [ngClass]="[
+        's0-tree-node__label',
+        's0-tree-node__label--clickable'
+      ]"
+      (click)="node.expanded = !node.expanded"
+    >
+      <span class="fw-3">{{ node.label }}</span>
+      <span class="ml-2 tc-g40" *ngIf="behavior !== 'select' && node.numberOfSelectedLeafs">(<span class="tc-1">{{ node.numberOfSelectedLeafs }}</span>/{{ node.numberOfLeafs }})</span>
+    </div>
+    <div
+      [ngClass]="[
+        's0-tree-node__check-box',
+        's0-tree-node__check-box--size-' + size
+      ]"
+      (click)="toggleSelection()"
+      *ngIf="behavior === 'check-list'"
+    >
+      <svg class="s0-tree-node__check-box-pipe" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" *ngIf="node.state === '1'">
+        <path d="M24 5.4l-2.8-2.8L8 15.8l-5.2-5.1L0 13.4l8 8 16-16z"/>
+      </svg>
+
+      <span class="s0-tree-node__check-box-ring" *ngIf="node.state === '2'"></span>
+    </div>
+  </div>
+  <div class="s0-tree-node__children" *ngIf="node.expanded">
+    <ng-content></ng-content>
+  </div>
+</div>
